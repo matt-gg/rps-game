@@ -1,42 +1,38 @@
 let playerScore = 0;
 let computerScore = 0;
-let roundWinner = '';
+let draws = 0;
+let round = 0;
+const btn = document.querySelectorAll('.btn');
+const gameplay = document.querySelector('.gameplay');
+const score = document.querySelector('.score');
+const result = document.querySelector('.result');
 
-console.log(`Let's play Rock Paper Scissors!`);
 
-for (let i = 0; i < 5; i++) {
-    playRound();
-}
-
-gameResult();
+// Game/round is played when player makes their selection
+btn.forEach((button) => {
+    button.addEventListener('click', () => {
+        playRound(button.id);
+    });
+});
 
 function getComputerSelection() {
-    let number = Math.floor(Math.random() * 3) + 1;
-    switch (number) {
-        case 1:
-            return 'rock';
-        case 2:
-            return 'paper';
-        case 3:
-            return 'scissors';
-    }
+    const options = ['rock', 'paper', 'scissors']
+    let number = Math.floor(Math.random() * 3)
+    return options[number];
 }
 
-function getPlayerSelection() {
-    let input = prompt("Enter Rock, Paper or Scissors: ");
-    return input;
-}
-
-function playRound() {
-    const playerSelection = getPlayerSelection();
+function playRound(playerChoice) {
+    const playerSelection = playerChoice;
     const computerSelection = getComputerSelection();
 
     game(playerSelection, computerSelection);
+    round++;
+    updateScore();
 }
 
 function game(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
-        tie(playerSelection);
+        draw(playerSelection);
     }
     if (
         (playerSelection === 'rock' && computerSelection === 'scissors') ||
@@ -54,32 +50,35 @@ function game(playerSelection, computerSelection) {
     }
 }
 
-function tie(selection) {
-    roundWinner = 'tie';
-    console.log(`It's a tie! Both players chose ${selection}.`);
+function draw(selection) {
+    gameplay.innerHTML = `It's a draw. Both players chose ${selection}.`;
+    draws++;
+
 }
 
 function playerWinsRound(playerSelection, computerSelection) {
-    console.log(`Player chose ${playerSelection}! Computer chose ${computerSelection}!`);
-    console.log(`Player wins this round!`);
-
-    roundWinner = 'player'
+    gameplay.innerHTML = `You chose ${playerSelection}! Computer chose ${computerSelection}!
+    You win this round!`;
     playerScore++;
 }
 
 function computerWinsRound(playerSelection, computerSelection) {
-    console.log(`Player chose ${playerSelection}! Computer chose ${computerSelection}!`);
-    console.log(`Computer wins this round!`);
-
-    roundWinner = 'computer'
+    gameplay.innerHTML = `You chose ${playerSelection}! Computer chose ${computerSelection}!
+    Computer wins this round!`;
     computerScore++;
 }
 
-function gameResult() {
-    console.log(`Game over.`);
-    console.log(`FINAL SCORE - Player: ${playerScore} - Computer: ${computerScore}`);
-
-    if (playerScore === computerScore) console.log(`It's a tie!`);
-    if (playerScore > computerScore) console.log(`Player wins!`);
-    if (playerScore < computerScore) console.log(`Computer wins!`);
+function updateScore() {
+    score.innerHTML = `ROUND ${round} - 
+    You: ${playerScore} - 
+    Computer: ${computerScore} - 
+    Draws: ${draws}`;
 }
+
+function gameResult() {
+
+    if (playerScore === computerScore) result.innerHTML = `Game over.<br>It's a draw!`;
+    if (playerScore > computerScore) result.innerHTML = `Game over.<br>You win!`;
+    if (playerScore < computerScore) result.innerHTML = `Game over.<br>Computer wins!`;
+}
+
