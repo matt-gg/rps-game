@@ -80,3 +80,5 @@ function gameResult() {
     if (playerScore < computerScore) result.innerHTML = `Game over.<br>Computer wins!`;
 }
 
+
+
