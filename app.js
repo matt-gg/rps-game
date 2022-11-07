@@ -53,7 +53,6 @@ function game(playerSelection, computerSelection) {
 function draw(selection) {
     gameplay.innerHTML = `It's a draw. Both players chose ${selection}.`;
     draws++;
-
 }
 
 function playerWinsRound(playerSelection, computerSelection) {
@@ -76,7 +75,6 @@ function updateScore() {
 }
 
 function gameResult() {
-
     if (playerScore === computerScore) result.innerHTML = `Game over.<br>It's a draw!`;
     if (playerScore > computerScore) result.innerHTML = `Game over.<br>You win!`;
     if (playerScore < computerScore) result.innerHTML = `Game over.<br>Computer wins!`;
