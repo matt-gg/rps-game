@@ -51,31 +51,31 @@ function game(playerSelection, computerSelection) {
 }
 
 function draw(selection) {
-    gameplay.innerHTML = `It's a draw! Both players chose ${selection}.`;
+    gameplay.textContent = `It's a draw! Both players chose ${selection}.`;
     draws++;
 }
 
 function playerWinsRound(playerSelection, computerSelection) {
-    gameplay.innerHTML = `Player chose ${playerSelection}! Computer chose ${computerSelection}!
+    gameplay.textContent = `Player chose ${playerSelection}! Computer chose ${computerSelection}!
     Player wins this round!`;
     playerScore++;
 }
 
 function computerWinsRound(playerSelection, computerSelection) {
-    gameplay.innerHTML = `Player chose ${playerSelection}! Computer chose ${computerSelection}!
+    gameplay.textContent = `Player chose ${playerSelection}! Computer chose ${computerSelection}!
     Computer wins this round!`;
     computerScore++;
 }
 
 function updateScore() {
-    score.innerHTML = `Round ${round} - 
+    score.textContent = `Round ${round} - 
         You: ${playerScore} -
         Computer: ${computerScore} -
         Draws: ${draws}`;
 }
 
 function gameResult() {
-    if (playerScore === computerScore) result.innerHTML = `It's a tie!`;
-    if (playerScore > computerScore) result.innerHTML = `Player wins!`;
-    if (playerScore < computerScore) result.innerHTML = `Computer wins!`;
+    if (playerScore === computerScore) result.textContent = `It's a tie!`;
+    if (playerScore > computerScore) result.textContent = `Player wins!`;
+    if (playerScore < computerScore) result.textContent = `Computer wins!`;
 }
